@@ -1,8 +1,9 @@
+const { string } = require('joi');
 const mongoose = require('mongoose');
 
 const AreaTypeSchema = new mongoose.Schema({
     area: {
-        type: Number,
+        type: string,
         required: true
     },
 });

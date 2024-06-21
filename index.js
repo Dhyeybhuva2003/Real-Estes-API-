@@ -18,6 +18,7 @@ const BudgetRoutes = require("./routes/BudgetRoutes");
 const OtherFeaturesRoutes = require("./routes/OtherFeaturesRoutes");
 const AreasqRoutes = require("./routes/AreasqRoutes");
 const propertyRoutes = require("./routes/propertyRoutes");
+const heroSectionRoute = require("./routes/heroSectionRoutes")
 
 // Connect to Cloudinary
 connectCloudinary();
@@ -58,6 +59,7 @@ app.use("/Budget", BudgetRoutes);
 app.use("/OtherFeatures", OtherFeaturesRoutes);
 app.use("/Areasq", AreasqRoutes);
 app.use("/property", propertyRoutes);
+app.use("/heroSection",heroSectionRoute)
 
 // Set the server port
 const PORT = process.env.PORT || 9001;
