@@ -18,7 +18,7 @@ const propertySchema = new mongoose.Schema({
     required: true,
   },
   startingPrice: {
-    type: Number,
+    type: String,
     required: true,
   },
   propertyType: {
@@ -50,11 +50,11 @@ const propertySchema = new mongoose.Schema({
     required: true,
   },
   price: {
-    type: Number,
+    type: String,
     required: true,
   },
   propertySize: {
-    type: Number,
+    type: String,
     required: true,
   },
   segment: {
@@ -70,7 +70,7 @@ const propertySchema = new mongoose.Schema({
     required: true,
   },
   searchBudget: {
-    type: Number,
+    type: String,
     required: true,
   },
   features: [

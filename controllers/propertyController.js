@@ -138,12 +138,8 @@ exports.searchProperties = async (req, res) => {
     Object.keys(req.query).forEach(key => {
       if (req.query[key]) {
         switch (key) {
-          case 'startingPrice':
           case 'sqft':
-          case 'price':
-          case 'propertySize':
-          case 'searchBudget':
-            // Convert to number for numerical fields
+            // Convert to number for the sqft field
             query[key] = Number(req.query[key]);
             break;
           case 'features':

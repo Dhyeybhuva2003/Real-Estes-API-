@@ -8,15 +8,8 @@ const { connectCloudinary } = require("./config/cloudinary");
 // import routes
 const contactRoutes = require("./routes/contactRoutes");
 const galleryRoutes = require("./routes/galleryRoutes");
-const PropertyforRoutes = require("./routes/PropertyforRoutes");
-const ProjectTypeRoutes = require("./routes/ProjectTypeRoutes");
-const AreaTypeRoutes = require("./routes/AreaTypeRoutes");
-const BedroomsRoutes = require("./routes/BedroomsRoutes");
-const PossessionStatusRoutes = require("./routes/PossessionStatusRoutes");
-const CategoryTypeRoutes = require("./routes/CategoryTypeRoutes");
-const BudgetRoutes = require("./routes/BudgetRoutes");
-const OtherFeaturesRoutes = require("./routes/OtherFeaturesRoutes");
-const AreasqRoutes = require("./routes/AreasqRoutes");
+
+
 const propertyRoutes = require("./routes/propertyRoutes");
 const heroSectionRoute = require("./routes/heroSectionRoutes")
 
@@ -49,15 +42,6 @@ app.use(
 // Use routes
 app.use("/contacts", contactRoutes);
 app.use("/gallery", galleryRoutes);
-app.use("/Propertyfor", PropertyforRoutes);
-app.use("/ProjectType", ProjectTypeRoutes);
-app.use("/AreaTypeRoutes", AreaTypeRoutes);
-app.use("/Bedrooms", BedroomsRoutes);
-app.use("/PossessionStatus", PossessionStatusRoutes);
-app.use("/CategoryType", CategoryTypeRoutes);
-app.use("/Budget", BudgetRoutes);
-app.use("/OtherFeatures", OtherFeaturesRoutes);
-app.use("/Areasq", AreasqRoutes);
 app.use("/property", propertyRoutes);
 app.use("/heroSection",heroSectionRoute)
 
