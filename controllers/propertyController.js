@@ -129,13 +129,31 @@ exports.deleteProperty = async (req, res) => {
 };
 
 // Search properties
+
+
 exports.searchProperties = async (req, res) => {
   try {
     const query = {};
 
     Object.keys(req.query).forEach(key => {
       if (req.query[key]) {
-        query[key] = new RegExp(req.query[key], 'i'); // Case-insensitive search
+        switch (key) {
+          case 'startingPrice':
+          case 'sqft':
+          case 'price':
+          case 'propertySize':
+          case 'searchBudget':
+            // Convert to number for numerical fields
+            query[key] = Number(req.query[key]);
+            break;
+          case 'features':
+            // Search within array fields
+            query[key] = { $in: req.query[key].split(',').map(feature => new RegExp(feature, 'i')) };
+            break;
+          default:
+            // Case-insensitive search for string fields
+            query[key] = new RegExp(req.query[key], 'i');
+        }
       }
     });
 
