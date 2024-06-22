@@ -1,24 +1,22 @@
 const HeroSection = require("../models/heroSectionModel");
-const { uploadMedia } = require("../config/cloudinary");
+const { uploadImage } = require("../config/cloudinary");
 
 // Controller to create a new hero section item
 exports.createHeroSectionItem = async (req, res) => {
   try {
-    // Check if the media file is present
     if (!req.files || !req.files.media) {
       return res.status(400).json({ message: "No media file uploaded" });
     }
 
-    const mediaUrl = await uploadMedia(req.files.media);
+    const uploadResult = await uploadImage(req.files.media);
+    const mediaUrl = uploadResult.url; // Extract the URL from the upload result
 
-    // Create the hero section item
     const heroSectionItem = new HeroSection({
       media: mediaUrl,
-      title: req.body.title || "Staring", // Default to "Staring" if title is not provided
+      title: req.body.title || "Staring",
     });
 
     await heroSectionItem.save();
-
     res.status(201).json(heroSectionItem);
   } catch (err) {
     res.status(400).json({ message: "Error creating hero section item: " + err.message });
@@ -53,17 +51,13 @@ exports.updateHeroSectionItem = async (req, res) => {
   try {
     let updateData = {};
 
-    // Check if an image file is present and upload it to Cloudinary
     if (req.files && req.files.media) {
-      const mediaUrl = await uploadMedia(req.files.media);
-      updateData.media = mediaUrl;
+      const uploadResult = await uploadImage(req.files.media);
+      updateData.media = uploadResult.url; // Extract the URL from the upload result
     }
 
-    // Check if the title field is present
     if (req.body.title) {
       updateData.title = req.body.title;
-    } else {
-      return res.status(400).json({ message: "Title is required" });
     }
 
     const heroSectionItem = await HeroSection.findByIdAndUpdate(

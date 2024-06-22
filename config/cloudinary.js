@@ -48,23 +48,3 @@ module.exports.uploadPDF = async (file, folder) => {
     }
 };
 
-module.exports.uploadMedia = async (file, folder) => {
-    try {
-        const options = {
-           folder,
-            resource_type: "auto",
-        };
-
-        // Check if the file is an image
-        if (file.mimetype.includes("image")) {
-            options.height = 500;
-            options.width = 1200;
-        }
-
-        const result = await cloudinary.uploader.upload(file.tempFilePath, options);
-        return result.secure_url;
-    } catch (error) {
-        console.error("Media upload error: ", error.message);
-        throw error;
-    }
-};
