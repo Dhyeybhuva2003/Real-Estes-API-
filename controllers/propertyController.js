@@ -133,27 +133,27 @@ exports.deleteProperty = async (req, res) => {
 
 exports.searchProperties = async (req, res) => {
   try {
-    const query = {};
+    const body = {};
 
-    Object.keys(req.query).forEach(key => {
-      if (req.query[key]) {
+    Object.keys(req.body).forEach(key => {
+      if (req.body[key]) {
         switch (key) {
           case 'sqft':
             // Convert to number for the sqft field
-            query[key] = Number(req.query[key]);
+            body[key] = Number(req.body[key]);
             break;
           case 'features':
             // Search within array fields
-            query[key] = { $in: req.query[key].split(',').map(feature => new RegExp(feature, 'i')) };
+            body[key] = { $in: req.body[key].split(',').map(feature => new RegExp(feature, 'i')) };
             break;
           default:
             // Case-insensitive search for string fields
-            query[key] = new RegExp(req.query[key], 'i');
+            body[key] = new RegExp(req.body[key], 'i');
         }
       }
     });
 
-    const properties = await Property.find(query);
+    const properties = await Property.find(body);
     res.status(200).json(properties);
   } catch (err) {
     res.status(500).json({ message: "Error searching properties: " + err.message });
